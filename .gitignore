@@ -1,0 +1,31 @@
+# 가상환경 및 패키지
+env/
+venv/
+.venv/
+
+# python 캐시 파일
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 환경 변수 및 보안 키
+.env
+.env.local
+secrets.json
+
+# 데이터베이스 파일
+*.db
+*.sqlite3
+instance/
+autosec.db
+
+# IDE 및 OS 설정 파일
+.vscode/
+.idea/
+.DS_Store
+
+# 로그 파일
+*.log
+
+# Flask 세션 파일
+flask_session/
