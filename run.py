@@ -1,10 +1,7 @@
-from flask import Flask
+from app import create_app
 
-app = Flask(__name__)
+app = create_app()
 
-@app.route('/')
-def index():
-    return 'Hello world'
-
-if __name__=='__main__':
-    app.run(debug=True, port=80)
+# python run.py로 직접 실행할 때만 동작
+if __name__ == '__main__':
+    app.run(debug=True)
