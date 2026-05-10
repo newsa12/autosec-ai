@@ -28,13 +28,13 @@ AutoSec AI는 사용자가 입력한 소스 코드를 Claude AI가 자동으로 
 ## 🖼️ 스크린샷
 
 ### 코드 입력 화면
-![코드 입력 화면](https://github.com/user-attachments/assets/8487426e-3029-4f17-9a31-9d8c6bbfce6f)
+![분석 결과](https://github.com/user-attachments/assets/c8550be5-349a-4a0a-b1d1-2f233736adf9)
 
 ### 분석 결과 - 코드 하이라이팅 및 차트
-![취약점 상세](https://github.com/user-attachments/assets/6f4838b2-90b5-4a9b-910a-8bf235ec71a8)
+![코드 입력 화면](https://github.com/user-attachments/assets/8487426e-3029-4f17-9a31-9d8c6bbfce6f)
 
 ### 분석 결과 - 취약점 상세 목록
-![분석 결과](https://github.com/user-attachments/assets/c8550be5-349a-4a0a-b1d1-2f233736adf9)
+![취약점 상세](https://github.com/user-attachments/assets/6f4838b2-90b5-4a9b-910a-8bf235ec71a8)
 
 ---
 
