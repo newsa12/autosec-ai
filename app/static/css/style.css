@@ -1,0 +1,313 @@
+/* ================================================
+   1. 전역 설정
+   ================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0f1117;
+    color: #e0e0e0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ================================================
+   2. 전체 레이아웃 (사이드바 + 메인)
+   ================================================ */
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* ================================================
+   3. 사이드바
+   ================================================ */
+.sidebar {
+    width: 260px;
+    min-width: 260px;
+    background-color: #1a1d27;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    border-right: 1px solid #2a2d3e;
+}
+
+#new-analysis-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+#new-analysis-btn:hover {
+    background-color: #2563eb;
+}
+
+.history-section h3 {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* 히스토리 카드 */
+.history-card {
+    padding: 12px;
+    background-color: #252836;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.6;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.history-card:hover {
+    border-color: #3b82f6;
+}
+
+/* ================================================
+   4. 메인 콘텐츠
+   ================================================ */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* ================================================
+   5. 로딩 오버레이
+   ================================================ */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    z-index: 1000;
+}
+
+#loading-overlay p {
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.8;
+}
+
+/* 스피너 */
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #374151;
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ================================================
+   6. 입력 화면
+   ================================================ */
+.input-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.input-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#language-select {
+    padding: 8px 12px;
+    background-color: #252836;
+    color: #e0e0e0;
+    border: 1px solid #2a2d3e;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#code-input {
+    width: 100%;
+    height: 500px;
+    padding: 16px;
+    background-color: #1a1d27;
+    color: #e0e0e0;
+    border: 1px solid #2a2d3e;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+#code-input:focus {
+    border-color: #3b82f6;
+}
+
+#analyze-btn {
+    padding: 12px 24px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    float: right;
+    transition: background-color 0.2s;
+}
+
+#analyze-btn:hover {
+    background-color: #2563eb;
+}
+
+/* ================================================
+   7. 결과 화면
+   ================================================ */
+
+/* 요약 카드 */
+.summary-card {
+    background-color: #1a1d27;
+    border: 1px solid #2a2d3e;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.summary-card h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.summary-info {
+    display: flex;
+    gap: 32px;
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+.summary-info strong {
+    color: #e0e0e0;
+}
+
+/* 도넛 차트 */
+.chart-container {
+    width: 250px;
+    margin: 0 auto 32px;
+}
+
+/* 취약점 아코디언 */
+.vuln-item {
+    background-color: #1a1d27;
+    border: 1px solid #2a2d3e;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.vuln-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.vuln-header:hover {
+    background-color: #252836;
+}
+
+.vuln-body {
+    padding: 16px;
+    border-top: 1px solid #2a2d3e;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #9ca3af;
+}
+
+.vuln-body p {
+    margin-bottom: 8px;
+}
+
+.vuln-body strong {
+    color: #e0e0e0;
+}
+
+.code-block {
+    background-color: #1a1d27;
+    border: 1px solid #2a2d3e;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.code-block h3 {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 12px;
+}
+
+.code-block pre {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    color: #e0e0e0;
+}
+
+.code-wrapper {
+    display: flex;
+    overflow-x: auto;
+}
+
+.line-numbers {
+    display: flex;
+    flex-direction: column;
+    padding: 0 12px;
+    color: #4b5563;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    border-right: 1px solid #2a2d3e;
+    margin-right: 12px;
+    user-select: none;  /* 라인 번호 드래그 선택 방지 */
+    min-width: 40px;
+    text-align: right;
+}
+
+.line-numbers span {
+    display: block;
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSec AI</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+    <!-- 전체 레이아웃: 사이드바 + 메인 -->
+    <div class="layout">
+
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+            <button id="new-analysis-btn">+ 새 코드 분석하기</button>
+
+            <div class="history-section">
+                <h3>과거 분석 히스토리</h3>
+                <!-- JS가 동적으로 히스토리 카드를 여기에 렌더링 -->
+                <div id="history-list"></div>
+            </div>
+        </aside>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="main-content">
+
+            <!-- 로딩 오버레이 (기본: 숨김) -->
+            <div id="loading-overlay" style="display:none;">
+                <div class="spinner"></div>
+                <p>AI가 코드를 분석하고 있습니다...<br>(평균 10~20초 소요)</p>
+            </div>
+
+            <!-- [입력 화면] 기본으로 보임 -->
+            <section id="input-section">
+                <div class="input-header">
+                    <h2>분석할 소스 코드를 입력해주세요.</h2>
+                    <!-- 언어 선택 -->
+                    <select id="language-select">
+                        <option value="Python">Python</option>
+                        <option value="C/C++">C/C++</option>
+                        <option value="Java">Java</option>
+                    </select>
+                </div>
+
+                <!-- 코드 입력창 -->
+                <textarea id="code-input" placeholder="여기에 코드를 붙여넣으세요..."></textarea>
+
+                <!-- 분석 버튼 -->
+                <button id="analyze-btn">보안 취약점 분석 시작</button>
+            </section>
+
+            <!-- [결과 화면] 기본으로 숨김 -->
+            <section id="result-section" style="display:none;">
+
+                <!-- 요약 정보 -->
+                <div class="summary-card">
+                    <h2>분석 결과</h2>
+                    <div class="summary-info">
+                        <span>언어: <strong id="result-language"></strong></span>
+                        <span>소요시간: <strong id="result-elapsed"></strong>초</span>
+                        <span>전체 위험도: <strong id="result-risk"></strong></span>
+                        <span>발견된 취약점: <strong id="result-count"></strong>건</span>
+                    </div>
+                </div>
+                
+                <!-- 코드 전체 보기 -->
+                <div class="code-block">
+                    <h3>분석된 코드</h3>
+                    <div class="code-wrapper">
+                        <div id="line-numbers" class="line-numbers"></div>
+                        <pre><code id="result-code"></code></pre>
+                    </div>
+                </div>
+
+                <!-- 도넛 차트 -->
+                <div class="chart-container">
+                    <canvas id="risk-chart"></canvas>
+                </div>
+
+                <!-- 취약점 상세 목록 -->
+                <div id="vuln-list"></div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
