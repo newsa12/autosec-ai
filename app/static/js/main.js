@@ -79,9 +79,43 @@ async function loadResult(analysisId) {
     document.getElementById('result-risk').textContent = data.total_risk
     document.getElementById('result-count').textContent = data.vul_count
 
+    // 기존 코드 렌더링 부분을 이걸로 교체
     const lines = data.code.split('\n')
     const lineNumbers = document.getElementById('line-numbers')
-    lineNumbers.innerHTML = lines.map((_, i) => `<span>${i+1}</span>`).join('')
+
+    // 취약점 라인 번호 수집
+    const vulnLines = {}
+    data.vulnerabilities.forEach(vuln => {
+        if (vuln.line) {
+            vulnLines[vuln.line] = vuln.severity
+        }
+    })
+
+    // 라인 번호 색상
+    const severityBg = {
+        'HIGH': 'rgba(255, 68, 68, 0.2)',
+        'MEDIUM': 'rgba(255, 170, 0, 0.2)',
+        'LOW': 'rgba(68, 187, 68, 0.2)'
+    }
+
+    // 라인 번호 렌더링
+    lineNumbers.innerHTML = lines.map((_, i) => {
+        const lineNum = i + 1
+        const severity = vulnLines[lineNum]
+        const bg = severity ? `background-color: ${severityBg[severity]}` : ''
+        return `<span style="${bg}">${lineNum}</span>`
+    }).join('')
+
+    // 코드 렌더링 (라인별로 배경색 적용)
+    const codeEl = document.getElementById('result-code')
+    codeEl.innerHTML = lines.map((line, i) => {
+        const lineNum = i + 1
+        const severity = vulnLines[lineNum]
+        const bg = severity ? `background-color: ${severityBg[severity]}` : ''
+        // XSS 방지
+        const escapedLine = escapeHtml(line)
+        return `<span style="display:block; ${bg}">${escapedLine || ' '}</span>`
+    }).join('')
 
     // 도넛 차트 렌더링
     renderChart(data.vulnerabilities)
@@ -174,7 +208,7 @@ function toggleVuln(index) {
 }
 
 // ================================================
-// 7. 분석 요청 (핵심 로직)
+// 7. 분석 요청
 // ================================================
 analyzeBtn.addEventListener('click', async () => {
     const code = codeInput.value.trim()
